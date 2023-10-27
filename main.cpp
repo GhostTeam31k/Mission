@@ -1,24 +1,31 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <random>
+#include <iostream> //STL 
 
-using namespace std;
+using namespace std;// std = standard , std :: cout -> std;를 치면 cout로 생략가능
 
-int main() {
-	vector<string> menu = {
-		"댄쟝 혹은 킴치찌개", "부산식 돼지국밥","니뽄식 돈까스", "조선식 돈까스", "집밥이 생각 날땐 백반", "코리안 AZ스타일 제육", "니뽄식 라멘", "중국산 재료를 이용한 중국집"// 여기에 원하는 음식을 추가하세요
-		// 추가할 음식을 계속 나열하세요
-	};
+int main()
+{
+    int Pocket[52]; // 0+1~51+1
 
-	random_device rd;
-	mt19937 rng(rd());
+    for (int i = 0; i < 52; ++i)
+    {
+        Pocket[i] = i + 1;
+    }
 
-	uniform_int_distribution<int> dist(0, menu.size() - 1);
+    srand(time(nullptr));
 
-	int choice = dist(rng);
+    for (int i = 0; i < 10000; ++i)
+    {
+        int First = rand() % 52;
+        int Second = rand() % 52;
+        int Temp = Pocket[First];
+        Pocket[First] = Pocket[Second];
+        Pocket[Second] = Temp;
+    }
+    for (int i = 0; i < 4; ++i)
+    {
+        cout << Pocket[i] << endl;
 
-	cout << "오늘의 식사 메뉴: " << menu[choice] << endl;
+    }
 
-	return 0;
+    return 0;
 }
